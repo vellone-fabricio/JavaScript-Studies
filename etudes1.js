@@ -92,3 +92,32 @@ testB([-11, 20]);
 testB([-51, 0]);
 testB([-55.9, 193.99]);
 testB([555, 193.99]);
+
+
+//-----------------------------------------------------------------------------
+console.log("\t\bSTUDYING FUNCTION 3:\n");
+function Palindrome(string){
+  string = String(string).toLowerCase();
+  let reverse = string.split("").reverse();
+  let reverseJoint = reverse.join("");
+
+  if (string == reverseJoint) return "IS a Palindrome";
+
+  return "ISNT a palindrome";
+}
+
+
+function testC(string){
+  console.log(`Outputs for our function 'Palindrome', for the string "${string}":`);
+
+  const result = Palindrome(string);
+
+  console.log(`So, our string ${result}\n`);
+}
+
+testC("Coco");
+testC("Adda");
+testC("CHASUBLE");
+testC("2002");
+testC(5995.3);
+testC(5995);
