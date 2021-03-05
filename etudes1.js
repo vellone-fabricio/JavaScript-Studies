@@ -73,7 +73,7 @@ function squareNumbers(interval){
       if (Number.isInteger(Math.sqrt(arr[i]))) allSquare.push(arr[i]);
     }
   }
-
+  
   return allSquare;
 }
 
@@ -121,3 +121,30 @@ testC("CHASUBLE");
 testC("2002");
 testC(5995.3);
 testC(5995);
+
+//-----------------------------------------------------------------------------
+console.log("\t\bSTUDYING FUNCTION 4:\n");
+function sliceColumn(array){
+  let copie = [];
+
+  for (let i = 0; i<array.length; i++){
+    if (array.length != 2)
+      copie.push(array[i].slice(0,-1));
+  }
+  return copie;
+}
+
+function maxChess(arr) {
+  if(arr.length === 1) {
+    return 0;
+  }else {
+    let B = arr.slice(0,-1); //hor   
+    let C = sliceColumn(arr);
+    
+    return Math.max([maxChess(B) + arr[arr.length-1, arr.length], maxChess(C) + arr[arr.length, arr.length-1]]);
+  }
+}
+
+A = [[2, 2, 4, 2], [0, 3, 0, 1], [1, 2, 2, 1], [4, 1, 2, 2]];
+
+console.log(maxChess(A));
