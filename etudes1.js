@@ -135,16 +135,53 @@ function sliceColumn(array){
 }
 
 function maxChess(arr) {
-  if(arr.length === 1) {
-    return 0;
-  }else {
-    let B = arr.slice(0,-1); //hor   
-    let C = sliceColumn(arr);
-    
-    return Math.max([maxChess(B) + arr[arr.length-1, arr.length], maxChess(C) + arr[arr.length, arr.length-1]]);
+  var resultTable = [];
+  let m = arr.length; //m columns
+  let n = arr[0].length; // n lines
+
+  for(var i=0; i<m; i++) {
+      resultTable[i] = new Array(n);
   }
+  resultTable[0][0] = arr[0][0];
+
+  for (let col = 1; col<n; col++){
+    resultTable[0][col] = arr[0][col] +  resultTable[0][col-1];
+  }
+  for (let line = 1; line<n; line++){
+    resultTable[line][0] = arr[line][0] +  resultTable[line-1][0];
+  }
+
+
+  for (let lines = 1; lines < m; lines++){
+    for (let columns = 1; columns < n; columns++){
+      let vertical = resultTable[lines-1][columns];
+      let horizontal = resultTable[lines][columns-1];
+      resultTable[lines][columns] = Math.max(vertical, horizontal) + arr[lines][columns];
+
+    }
+  }
+  return resultTable[m-1][n-1]
 }
 
 A = [[2, 2, 4, 2], [0, 3, 0, 1], [1, 2, 2, 1], [4, 1, 2, 2]];
 
-console.log(maxChess(A));
+console.log('Output maxChess Function: ' + String(maxChess(A)) + '\n');
+
+//-----------------------------------------------------------------------------
+console.log("\t\bSTUDYING FUNCTION 5:\n");
+
+function distArr(arr) {
+  let distMin = Number.POSITIVE_INFINITY;
+
+  arr.sort((a, b) => a-b);
+
+  for (let index = 0; index<arr.length-1; index++){
+    let distAnalyse = arr[index+1]-arr[index];
+    distMin = Math.min(distMin, distAnalyse);
+  }
+
+  return distMin;
+}
+
+let array = [53, 1, 5, 3, 13, 7, 1, 9, 67]
+console.log(`Output of min distance function: ${distArr(array)} \n`)
