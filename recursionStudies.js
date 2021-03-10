@@ -13,7 +13,7 @@ var factorial = function(n) {
     return n * factorial(n-1);
   }
 };
-console.log('Factorial: '+ String(factorial(5)));
+console.log('1. Factorial: '+ String(factorial(5)));
 
 // 2. Compute the sum of an array of integers.
 // sum([1,2,3,4,5,6]); // 21
@@ -24,23 +24,23 @@ var sum = function(array) {
     return array[0] + sum(array.slice(1, array.length));
   }
 };
-console.log('Array Sum: ' + String(sum([1,2,3,4,5,6])))
+console.log('2. Array Sum: ' + String(sum([1,2,3,4,5,6])))
 
 
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
-  if (array.length === 1){
-    if (array[0].length === 1){
-      return array[0][0];
-    }else {
-      array[0][0] + sum(array[0].slice(1, array.length))
-    }
+  if (array.length === 1) {
+    return array[0];
+  }else if (array[0] instanceof Array) {
+    return array[0][0] + arraySum(array[0].slice(1, array[0].length));
   }else {
-    return array[0] + sum(array.slice(1, array.length));
+    return array[0] + arraySum(array.slice(1, array.length));
   }
 };
 arr = [1,[2,3],[[4]],5];
+// console.log(arr.slice(1, arr.length));
+// console.log(arr.slice(1, arr.length).length);
 // console.log(arr[3].length);
 // console.log('Nested array sum: ' + String(arraySum([1,[2,3],[[4]],5])));
 
@@ -54,7 +54,7 @@ var isEven = function(n) {
     return isEven(n-2);
   }
 };
-console.log('isEven: ' + String(isEven(10)));
+console.log('4. isEven: ' + String(isEven(10)));
 
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
@@ -68,7 +68,7 @@ var sumBelow = function(n) {
     return n-1 + sumBelow(n-1) ; 
   }
 };
-console.log('sumBelow: ' + String(sumBelow(7)));
+console.log('5. sumBelow: ' + String(sumBelow(7)));
 
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
@@ -79,7 +79,7 @@ var range = function(x, y) {
     return  [y-1, range(x,y-1)];
   }
 };
-console.log('Range: ' + String(range(9,15)));
+console.log('6. Range: ' + String(range(9,15)));
 
 // 7. Compute the exponent of a number.
 // The exponent of a number says how many times the base number is used as a factor.
@@ -87,14 +87,30 @@ console.log('Range: ' + String(range(9,15)));
 // exponent(4,3); // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
+  if (exp === 0) {
+    return 1;
+  }else {
+    return base * exponent(base, exp-1);
+  }
 };
+console.log('7. Exponente: ' + String(exponent(5,3)));
+
 
 // 8. Determine if a number is a power of two.
 // powerOfTwo(1); // true
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
+  if (n < 1){
+    return false;
+  } else if (n === 1) {
+    return true;
+  } else {
+    return powerOfTwo(n/2)
+  }
 };
+console.log('8. Power of Two: ' + String(powerOfTwo(64)));
+
 
 // 9. Write a function that reverses a string.
 var reverse = function(string) {
@@ -110,16 +126,30 @@ var palindrome = function(string) {
 // modulo(17,5) // 2
 // modulo(22,6) // 4
 var modulo = function(x, y) {
+  if (x < 0) {
+    return x + y;
+  } else {
+    return modulo(x-y, y);
+  }
 };
+console.log('11. Modulo: ' + String(modulo(17, 5)));
+
 
 // 12. Write a function that multiplies two numbers without using the * operator or
 // Math methods.
 var multiply = function(x, y) {
+  if (y === 0) {
+    return 0;
+  }else {
+    return x + multiply(x, y-1);
+  }
 };
+console.log('12. Multiply: ' + String(multiply(5,10)));
 
 // 13. Write a function that divides two numbers without using the / operator or
 // Math methods to arrive at an approximate quotient (ignore decimal endings).
 var divide = function(x, y) {
+
 };
 
 // 14. Find the greatest common divisor (gcd) of two positive numbers. The GCD of two
