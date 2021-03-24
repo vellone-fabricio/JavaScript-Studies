@@ -31,17 +31,17 @@
 # 1, 2, 3 step par fois
 
 
-# def combEscalier(n):
-#   if (n == 0):
-#     return 1
-#   elif (n < 0):
-#     return 0
-#   else:
-#     return combEscalier(n-1)+combEscalier(n-2)+combEscalier(n-3)
+def combEscalier(n):
+  if (n == 0):
+    return 1
+  elif (n < 0):
+    return 0
+  else:
+    return combEscalier(n-1)+combEscalier(n-2)+combEscalier(n-3)
 
 
-# n = 3
-# print(combEscalier(n))
+n = 3
+print(combEscalier(n))
 
 
 def Factorial(n):
@@ -57,3 +57,5 @@ print(Factorial(n))
   
         
 
+import thermopy
+import numpy 
